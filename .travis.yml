@@ -1,0 +1,29 @@
+sudo: required
+
+services:
+  - docker
+
+env:
+  DOCKER_COMPOSE_VERSION: 1.23.2
+
+before_install:
+  - sudo rm /usr/local/bin/docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
+
+before_script:
+  - docker-compose up -d --build
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-2"
+  app: "docker-react"
+  env: "DockerReact-env"
+  bucket_name: "elasticbeanstalk-us-east-2-123289027485"
+  bucket_path: "docker-react"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
