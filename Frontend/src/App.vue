@@ -47,8 +47,7 @@
               </router-link>
             </li>
             <li class="nav-item dropdown" v-if="isLogged()">
-              <a
-                class="nav-link dropdown-toggle"
+              <a class="nav-link dropdown-toggle"
                 href="#"
                 id="navbarDropdownMenuLink"
                 role="button"
