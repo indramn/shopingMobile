@@ -18,10 +18,10 @@ before_script:
 deploy:
   provider: elasticbeanstalk
   region: "us-east-2"
-  app: "docker-react"
-  env: "DockerReact-env"
+  app: "shopingMobile"
+  env: "shopingmobile-env"
   bucket_name: "elasticbeanstalk-us-east-2-123289027485"
-  bucket_path: "docker-react"
+  bucket_path: "shopingMobile"
   on:
     branch: master
   access_key_id: $AWS_ACCESS_KEY

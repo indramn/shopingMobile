@@ -12,10 +12,8 @@ services:
       - 27017
   
   back:
-    build: 
-      context: ./Backend
-    image: indreshmn/vuemongoindra-bankend
-    container_name: vuemongoindra_bankend
+    image: indreshmn/shopingvuespringbackend
+    container_name: shopingvuespringbackend
     #environment:
     #  WAIT_HOSTS: postgres:5433
     ports:
@@ -27,10 +25,8 @@ services:
       - mongodb
 
   front:
-    build: 
-     context: ./Frontend
-    image: indreshmn/vuemongoindra-front
-    container_name: vuemongoindra-front
+    image: indreshmn/shopingvuespringfrontend
+    container_name: shopingvuespringfrontend
     ports:
       - 4200:4200
     depends_on:
