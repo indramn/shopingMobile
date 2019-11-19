@@ -1,0 +1,44 @@
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+# Eclipse #
+.settings
+.project
+.classpath
+.studio
+target
+
+# Apple # 
+.DS_Store
+
+# Intellij #
+.idea
+*.iml
+*.log
+
+# VSCode
+.vscode
+
+# logback
+logback.out.xml
+
+Backend/src/main/resources/public/
+Backend/target
+Frontend/dist/
+Frontend/node/
+Frontend/node_modules/
+Frontend/npm-debug.log
+Frontend/target
+Frontend/test-output
+Frontend/tests/e2e/reports
+Frontend/tests/unit/coverage
+Frontend/yarn-error.log
+Frontend/yarn.lock
+security/target/
+selenium-debug.log
+
+!.mvn/wrapper/maven-wrapper.jar

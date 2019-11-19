@@ -1,0 +1,45 @@
+version: '3'
+services:
+  db:
+    image: mongo
+    #hostname: postgres
+    container_name: shop-mongo-db
+    ports:
+      - "27017:27017"
+    networks:
+      - mongodb
+    expose: 
+      - 27017
+  
+  back:
+    build: 
+      context: ./Backend
+    image: indreshmn/vuemongoindra-bankend
+    container_name: vuemongoindra_bankend
+    #environment:
+    #  WAIT_HOSTS: postgres:5433
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+    networks:
+     # - frontback 
+      - mongodb
+
+  front:
+    build: 
+     context: ./Frontend
+    image: indreshmn/vuemongoindra-front
+    container_name: vuemongoindra-front
+    ports:
+      - 4200:4200
+    depends_on:
+      - back
+    networks: 
+      - frontback     
+  
+networks: 
+  mongodb:
+    driver: bridge
+  frontback:
+    driver: bridge
