@@ -1,23 +1,23 @@
-sudo: required
+sudo: false
+
+language: bash
+
+dist: trusty
 
 services:
   - docker
 
-env:
-  DOCKER_COMPOSE_VERSION: 1.23.2
+before_script:
+  - make clean
+  - make deps dev=yes
+  - make build dev=no
+  - sudo rm -rf node_modules/
+  - make deps.yarn dev=no
+  - make dist
+  - make docker.image no-cache=yes VERSION=test
+  - sudo rm -rf node_modules/
+  - make deps.yarn dev=yes
 
-
-
-
-deploy:
-  provider: elasticbeanstalk
-  region: "us-east-2"
-  app: "shopingMobile"
-  env: "shopingmobile-env"
-  bucket_name: "elasticbeanstalk-us-east-2-123289027485"
-  bucket_path: "shopingMobile"
-  on:
-    branch: master
-  access_key_id: $AWS_ACCESS_KEY
-  secret_access_key:
-    secure: "$AWS_SECRET_KEY"
+script:
+  - make lint
+  - make test start-app=yes VERSION=test
